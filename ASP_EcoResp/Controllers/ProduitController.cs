@@ -26,8 +26,8 @@ namespace ASP_EcoResp.Controllers
         // GET: ProduitController/Details/5
         public ActionResult Details(int id)
         {
-            
-            return View();
+            ProduitDetailsViewModel model = _produitRepository.Get(id).ToDetails();
+            return View(model);
         }
 
         // GET: ProduitController/Create
