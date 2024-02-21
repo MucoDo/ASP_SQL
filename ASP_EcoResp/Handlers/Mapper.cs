@@ -1,5 +1,6 @@
 ﻿using ASP_EcoResp.Models;
 using BLL_EcoResp.Entities;
+using System.Net.Http.Headers;
 
 namespace ASP_EcoResp.Handlers
 {
@@ -35,6 +36,34 @@ namespace ASP_EcoResp.Handlers
         {
             if (entity is null) return null;
             return new Produit(0,entity.NomProduit, entity.Description, entity.Prix, entity.EcoScore, entity.Cat);
+        }
+
+        public static ProduitEditForm ToEditForm(this Produit entity)
+        {
+            if (entity is null) return null;
+            return new ProduitEditForm()
+            {
+                Id_Produit = entity.Id_Produit,
+                NomProduit = entity.NomProduit,
+                Description = entity.Description,
+                Prix = entity.Prix,
+                EcoScore = entity.EcoScore,
+                Cat = entity.Cat
+            };
+
+        }
+
+        public static Produit ToBLL(this ProduitEditForm entity)
+        {
+            if (entity is null) return null;
+            return new Produit(
+                entity.Id_Produit,
+                entity.NomProduit,
+                entity.Description,
+                entity.Prix,
+                entity.EcoScore,
+                entity.Cat);
+
         }
         #endregion
     }

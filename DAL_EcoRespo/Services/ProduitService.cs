@@ -70,6 +70,27 @@ namespace DAL_EcoResp.Services
                 }
             }
         }
+
+        public void Update(Produit data)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_Produit_Update";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("id_Produit", data.Id_Produit);
+                    command.Parameters.AddWithValue("nomProduit", data.NomProduit);
+                    command.Parameters.AddWithValue("description", data.Description);
+                    command.Parameters.AddWithValue("prix", data.Prix);
+                    command.Parameters.AddWithValue("ecoscore", data.EcoScore);
+                    command.Parameters.AddWithValue("cat", data.Cat);
+                    connection.Open();
+                    if (command.ExecuteNonQuery() <= 0)
+                        throw new ArgumentException(nameof(data.Id_Produit), $"L'identifiant {data.Id_Produit} n'est pas das la base de données");
+                }
+            }
+        }
         void ICRUDRepository<Produit, int>.Delete(int id)
         {
             throw new NotImplementedException();
@@ -77,9 +98,5 @@ namespace DAL_EcoResp.Services
 
       
 
-        void ICRUDRepository<Produit, int>.Update(Produit data)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -58,21 +58,26 @@ namespace ASP_EcoResp.Controllers
         // GET: ProduitController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            ProduitEditForm model = _produitRepository.Get(id).ToEditForm();
+            return View(model);
         }
 
         // POST: ProduitController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, ProduitEditForm form)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (form is null) ModelState.AddModelError(nameof(form), "Le formulaire ne correspond pas");
+                if (!ModelState.IsValid) throw new Exception();
+                _produitRepository.Update(form.ToBLL());
+                return RedirectToAction(nameof(Details), new { id });
+                
             }
             catch
             {
-                return View();
+                return View(form);
             }
         }
 

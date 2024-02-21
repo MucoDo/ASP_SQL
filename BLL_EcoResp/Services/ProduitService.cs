@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using BLL_EcoResp.Mapper;
+using static System.Collections.Specialized.BitVector32;
 
 namespace BLL_EcoResp.Services
 {
@@ -31,16 +32,15 @@ namespace BLL_EcoResp.Services
         {
             return _repository.Insert(data.ToDAL());
         }
+
+        public void Update(Produit data)
+        {
+            _repository.Update(data.ToDAL());
+        }
         void ICRUDRepository<Produit, int>.Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-       
-
-        void ICRUDRepository<Produit, int>.Update(Produit data)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
