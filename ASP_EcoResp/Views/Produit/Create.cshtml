@@ -1,4 +1,5 @@
-﻿@model ASP_EcoResp.Models.ProduitCreateForm
+﻿@using BLL_EcoResp.Entities;
+@model ASP_EcoResp.Models.ProduitCreateForm
 
 @{
     ViewData["Title"] = "Create";
@@ -29,7 +30,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="EcoScore" class="control-label"></label>
-                <input asp-for="EcoScore" class="form-control" />
+                <select asp-for="EcoScore" class="form-control">
+                    <option value="">Veuillez choisir un EcoScore</option>
+                    @foreach (var ecoscore in Enum.GetValues(typeof(EcoScore)))
+                    {
+                        <option value="@ecoscore">@ecoscore</option>
+                    }
+                </select>
                 <span asp-validation-for="EcoScore" class="text-danger"></span>
             </div>
             <div class="form-group">

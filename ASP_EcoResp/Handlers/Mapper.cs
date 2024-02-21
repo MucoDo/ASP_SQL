@@ -14,7 +14,7 @@ namespace ASP_EcoResp.Handlers
                 Id_Produit=entity.Id_Produit,
                 NomProduit = entity.NomProduit,
                 Prix = entity.Prix,
-                EcoScore = entity.EcoScore,
+                EcoScore = entity.EcoScore.ToString(),
             };
         } 
 
@@ -27,7 +27,7 @@ namespace ASP_EcoResp.Handlers
                 NomProduit = entity.NomProduit,
                 Description = entity.Description,
                 Prix = entity.Prix,
-                EcoScore = entity.EcoScore,
+                EcoScore = entity.EcoScore.ToString(),
                 Cat = entity.Cat
             };
         }

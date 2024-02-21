@@ -6,7 +6,7 @@ namespace BLL_EcoResp.Entities
 {
     public class Produit
     {
-        public Produit(int id_Produit, string nomProduit, string description, decimal prix, string ecoScore, string cat)
+        public Produit(int id_Produit, string nomProduit, string description, decimal prix, EcoScore ecoScore, string cat)
         {
             Id_Produit = id_Produit;
             NomProduit = nomProduit;
@@ -20,7 +20,7 @@ namespace BLL_EcoResp.Entities
         public string NomProduit { get; set; }
         public string Description { get; set; }
         public decimal Prix { get; set; }
-        public string EcoScore { get; set; }
+        public EcoScore EcoScore { get; set; }
         public string Cat { get; set; }
     }
 }

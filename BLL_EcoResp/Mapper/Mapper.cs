@@ -17,7 +17,7 @@ namespace BLL_EcoResp.Mapper
                 entity.NomProduit,
                 entity.Description,
                 entity.Prix,
-                entity.EcoScore,
+                Enum.Parse<BLL.EcoScore>(entity.EcoScore),
                 entity.Cat
                 );
         }
@@ -30,7 +30,7 @@ namespace BLL_EcoResp.Mapper
                 NomProduit = entity.NomProduit,
                 Description = entity.Description,
                 Prix = entity.Prix,
-                EcoScore = entity.EcoScore,
+                EcoScore = entity.EcoScore.ToString(),
                 Cat = entity.Cat
             };
         }

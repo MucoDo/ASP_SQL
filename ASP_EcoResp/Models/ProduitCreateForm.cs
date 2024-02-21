@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using BLL_EcoResp.Entities;
 
 namespace ASP_EcoResp.Models
 {
@@ -19,13 +20,14 @@ namespace ASP_EcoResp.Models
         public string Description { get; set; }
         [DisplayName("Prix")]
         [Required(ErrorMessage = "Le prix du produit est obligatoire.")]
+        [DataType(DataType.Currency)]
 
 
         public decimal Prix { get; set; }
         [DisplayName("EcoScore")]
         [Required(ErrorMessage = "L'EcoScore du produit est obligatoire.")]
 
-        public string EcoScore { get; set; }
+        public EcoScore EcoScore { get; set; }
         [DisplayName("Categorie")]
         [Required(ErrorMessage = "La catégorie du produit est obligatoire.")]
 
