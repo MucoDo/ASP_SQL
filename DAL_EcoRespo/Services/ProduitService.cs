@@ -21,14 +21,14 @@ namespace DAL_EcoResp.Services
             {
                 using (SqlCommand command = connection.CreateCommand())
                 {
-                    command.CommandText = "SP_Produit_GetALL";
+                    command.CommandText = "SP_Produit_GetALL_favoris";
                     command.CommandType = CommandType.StoredProcedure;
                     connection.Open();
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            yield return reader.ToProduit();
+                            yield return reader.ToProduit_Fav();
                         }
                     }
                 }
@@ -42,7 +42,7 @@ namespace DAL_EcoResp.Services
                 {
                     command.CommandText = "SP_Produit_GetById";
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@id_produit", id);
+                    command.Parameters.AddWithValue("id_produit", id);
                     connection.Open();
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -52,15 +52,30 @@ namespace DAL_EcoResp.Services
                 }
             }
         }
+        public int Insert(Produit data)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_Produit_Insert";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("nomProduit", data.NomProduit);
+                    command.Parameters.AddWithValue("description", data.Description);
+                    command.Parameters.AddWithValue("prix", data.Prix);
+                    command.Parameters.AddWithValue("ecoScore", data.EcoScore);
+                    command.Parameters.AddWithValue("cat", data.Cat);
+                    connection.Open();
+                    return (int)command.ExecuteScalar();
+                }
+            }
+        }
         void ICRUDRepository<Produit, int>.Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        int ICRUDRepository<Produit, int>.Insert(Produit data)
-        {
-            throw new NotImplementedException();
-        }
+      
 
         void ICRUDRepository<Produit, int>.Update(Produit data)
         {

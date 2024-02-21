@@ -21,5 +21,18 @@ namespace BLL_EcoResp.Mapper
                 entity.Cat
                 );
         }
+       public static DAL.Produit ToDAL(this BLL.Produit entity)
+        {
+            if (entity is null) return null;
+            return new DAL.Produit()
+            {
+                Id_Produit = entity.Id_Produit,
+                NomProduit = entity.NomProduit,
+                Description = entity.Description,
+                Prix = entity.Prix,
+                EcoScore = entity.EcoScore,
+                Cat = entity.Cat
+            };
+        }
     }
 }

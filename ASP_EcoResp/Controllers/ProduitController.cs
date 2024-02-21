@@ -4,6 +4,7 @@ using Shared;
 using BLL_EcoResp.Entities;
 using ASP_EcoResp.Models;
 using ASP_EcoResp.Handlers;
+using System.Net.Http.Headers;
 
 namespace ASP_EcoResp.Controllers
 {
@@ -39,11 +40,14 @@ namespace ASP_EcoResp.Controllers
         // POST: ProduitController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(ProduitCreateForm form)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (form is null) ModelState.AddModelError(nameof(form), "Aucun formulaire retourné...");
+                if (!ModelState.IsValid) throw new Exception();
+                int produit_id = _produitRepository.Insert(form.ToBLL());
+                return RedirectToAction(nameof(Details), new { id = produit_id });
             }
             catch
             {

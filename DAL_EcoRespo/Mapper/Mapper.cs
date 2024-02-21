@@ -21,5 +21,17 @@ namespace DAL_EcoResp.Mapper
                 Cat = (string)record["Cat"]
             };
         }
+
+        public static Produit ToProduit_Fav(this IDataRecord record)
+        {
+            if (record is null) return null;
+            return new Produit()
+            {
+                Id_Produit = (int)record["Id_Produit"],
+                NomProduit = (string)record["NomProduit"]
+            };
+        }
+
+
     }
 }

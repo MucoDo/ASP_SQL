@@ -27,15 +27,16 @@ namespace BLL_EcoResp.Services
             return _repository.Get(id).ToBLL();
         }
 
+        public int Insert(Produit data)
+        {
+            return _repository.Insert(data.ToDAL());
+        }
         void ICRUDRepository<Produit, int>.Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        int ICRUDRepository<Produit, int>.Insert(Produit data)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         void ICRUDRepository<Produit, int>.Update(Produit data)
         {
