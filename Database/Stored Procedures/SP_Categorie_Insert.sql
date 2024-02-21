@@ -3,4 +3,5 @@
 
 AS
 	INSERT into Categorie ([Cat])
+	output inserted.Cat
 	Values (@categorie) 
