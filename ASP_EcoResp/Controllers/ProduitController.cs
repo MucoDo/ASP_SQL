@@ -26,6 +26,7 @@ namespace ASP_EcoResp.Controllers
         // GET: ProduitController/Details/5
         public ActionResult Details(int id)
         {
+            
             return View();
         }
 
