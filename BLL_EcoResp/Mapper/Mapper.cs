@@ -17,7 +17,6 @@ namespace BLL_EcoResp.Mapper
                 entity.NomProduit,
                 entity.Description,
                 entity.Prix,
-                Enum.Parse<BLL.EcoScore>(entity.EcoScore),
                 entity.Cat
                 );
         }
