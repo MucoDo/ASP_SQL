@@ -27,7 +27,18 @@ namespace ASP_EcoResp.Controllers
         // GET: ProduitController/Details/5
         public ActionResult Details(int id)
         {
-            ProduitDetailsViewModel model = _produitRepository.Get(id).ToDetails();
+            ProduitDetailsViewModel model;
+            try
+            {
+                model = _produitRepository.Get(id).ToDetails();
+
+            }
+            catch (Exception)
+            {
+                TempData["ErrorMessage"] = $"L'identifiant {id} est invalide...";
+                return RedirectToAction(nameof(Index));
+                
+            }
             return View(model);
         }
 
@@ -47,6 +58,7 @@ namespace ASP_EcoResp.Controllers
                 if (form is null) ModelState.AddModelError(nameof(form), "Aucun formulaire retourné...");
                 if (!ModelState.IsValid) throw new Exception();
                 int produit_id = _produitRepository.Insert(form.ToBLL());
+                TempData["SuccessMessage"] = "Enregistrement effectué avec succès!";
                 return RedirectToAction(nameof(Details), new { id = produit_id });
             }
             catch
@@ -66,9 +78,11 @@ namespace ASP_EcoResp.Controllers
             }
             catch
             { 
-                return View();
+                TempData["ErrorMessage"] = $"L'identifiant {id} est invalide...";
+                return RedirectToAction(nameof(Index));
+
             }
-        
+
         }
 
         // POST: ProduitController/Edit/5
@@ -81,6 +95,7 @@ namespace ASP_EcoResp.Controllers
                 if (form is null) ModelState.AddModelError(nameof(form), "Le formulaire ne correspond pas");
                 if (!ModelState.IsValid) throw new Exception();
                 _produitRepository.Update(form.ToBLL());
+                TempData["SuccessMessage"] = $"L'enregistrement {id} a été mis à jour.";
                 return RedirectToAction(nameof(Details), new { id });
                 
             }
