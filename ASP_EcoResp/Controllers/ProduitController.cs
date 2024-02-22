@@ -5,6 +5,7 @@ using BLL_EcoResp.Entities;
 using ASP_EcoResp.Models;
 using ASP_EcoResp.Handlers;
 using System.Net.Http.Headers;
+using System.Reflection;
 
 namespace ASP_EcoResp.Controllers
 {
@@ -139,5 +140,22 @@ namespace ASP_EcoResp.Controllers
                 return View(form);
             }
         }
-    }
+
+        public ActionResult Search(string? search)
+        {
+            try
+            {
+
+                //IEnumerable<ProduitListItemViewModel> model = _produitRepository.GetBySearchBar(search);
+                //return View(model);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+
+                return View();
+            }
+        }
+
+        }
 }

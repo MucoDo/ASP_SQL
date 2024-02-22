@@ -16,7 +16,8 @@ namespace ASP_EcoResp
             #region Services
             builder.Services.AddScoped<IProduitRepository<BLL.Entities.Produit>, BLL.Services.ProduitService>();
             builder.Services.AddScoped<IProduitRepository<DAL.Entities.Produit>, DAL.Services.ProduitService>();
-
+            builder.Services.AddScoped<BLL.Services.CategorieService>();
+            builder.Services.AddScoped<DAL.Services.CategorieService>();
 
             #endregion
 

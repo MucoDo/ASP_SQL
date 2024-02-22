@@ -107,6 +107,22 @@ namespace DAL_EcoResp.Services
                 }
             }
         }
+        public IEnumerable<Produit> GetBySearchBar(string search)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_Produit_SearchBar";
+                    command.Parameters.AddWithValue("search", search);
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read()) yield return reader.ToProduit();
+                    }
+                }
+            }
+        }
 
     }
 }
