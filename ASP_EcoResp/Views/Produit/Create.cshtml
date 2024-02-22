@@ -1,5 +1,7 @@
 ﻿@using BLL_EcoResp.Entities;
+@using Shared;
 @model ASP_EcoResp.Models.ProduitCreateForm
+@inject BLL_EcoResp.Services.CategorieService categorieRepository
 
 @{
     ViewData["Title"] = "Create";
@@ -46,7 +48,7 @@
                 categorieRepository.Get()
                 .Select(d => new SelectListItem(){
                 Text = d,
-                Value = d}),
+                Value = d.ToString()}),
                 "Veuillez choisir une categorie",
                 new { @class = "form-select"}
                 )

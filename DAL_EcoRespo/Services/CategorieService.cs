@@ -28,7 +28,7 @@ namespace DAL_EcoResp.Services
                     {
                         while (reader.Read())
                         {
-                            yield return reader.ToString();
+                            yield return reader["Cat"].ToString();
                         }
                     }
                 }
