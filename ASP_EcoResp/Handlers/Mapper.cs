@@ -12,10 +12,10 @@ namespace ASP_EcoResp.Handlers
             if (entity is null) return null;
             return new ProduitListItemViewModel()
             {
-                Id_Produit=entity.Id_Produit,
+                Id_Produit = entity.Id_Produit,
                 NomProduit = entity.NomProduit,
                 Prix = entity.Prix,
-                EcoScore = entity.EcoScore.ToString(),
+                EcoScore = entity.EcoScore.ToString()
             };
         } 
 
