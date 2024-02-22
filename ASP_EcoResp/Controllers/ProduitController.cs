@@ -146,9 +146,9 @@ namespace ASP_EcoResp.Controllers
             try
             {
 
-                //IEnumerable<ProduitListItemViewModel> model = _produitRepository.GetBySearchBar(search);
-                //return View(model);
-                return RedirectToAction(nameof(Index));
+                IEnumerable<ProduitListItemViewModel> model = _produitRepository.GetBySearchBar(search).Select(d => d.ToListItem());
+                return View(model);
+                //return RedirectToAction(nameof(Index));
             }
             catch (Exception)
             {

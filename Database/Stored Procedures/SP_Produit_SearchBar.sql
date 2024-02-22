@@ -6,4 +6,4 @@ AS
     
     SELECT * 
     FROM [dbo].[Produit] 
-    WHERE UPPER([NomProduit]) LIKE UPPER(@searchTerm);
+    WHERE UPPER([NomProduit]) LIKE UPPER(@searchTerm) OR UPPER([Cat]) LIKE UPPER(@searchTerm);

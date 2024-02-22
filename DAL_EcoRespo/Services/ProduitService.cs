@@ -114,6 +114,7 @@ namespace DAL_EcoResp.Services
                 using (SqlCommand command = connection.CreateCommand())
                 {
                     command.CommandText = "SP_Produit_SearchBar";
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("search", search);
                     connection.Open();
                     using (SqlDataReader reader = command.ExecuteReader())
