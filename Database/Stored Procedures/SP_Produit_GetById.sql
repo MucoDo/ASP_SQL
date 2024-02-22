@@ -8,6 +8,6 @@ AS
                [Prix],
                [EcoScore],
                [Cat]
-    FROM Produit
-    Where Id_Produit=@id_produit
+    FROM [dbo].Produit
+    WHERE [Id_Produit]=@id_produit
 

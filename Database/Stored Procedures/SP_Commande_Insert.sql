@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[SP_Commande_Insert]
-	@dateCommande datetime
+	@dateCommande DATETIME
 	
 AS
 	INSERT INTO [dbo].[Commande] ([DateCommande]) 
-	output inserted.Id_Commande
-	VALUES (@dateCommande);
+		OUTPUT [inserted].[Id_Commande]
+		VALUES (@dateCommande);

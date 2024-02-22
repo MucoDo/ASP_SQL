@@ -58,8 +58,17 @@ namespace ASP_EcoResp.Controllers
         // GET: ProduitController/Edit/5
         public ActionResult Edit(int id)
         {
-            ProduitEditForm model = _produitRepository.Get(id).ToEditForm();
-            return View(model);
+            try
+            {
+                ProduitEditForm model = _produitRepository.Get(id).ToEditForm();
+                if (model is null) throw new ArgumentOutOfRangeException(nameof(id), $"Pas de produit avec l'identifiant {id}");
+                return View(model);
+            }
+            catch
+            { 
+                return View();
+            }
+        
         }
 
         // POST: ProduitController/Edit/5

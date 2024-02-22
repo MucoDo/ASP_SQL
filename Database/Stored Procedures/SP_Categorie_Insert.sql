@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[SP_Categorie_Insert]
-	@categorie nvarchar(100)
+	@categorie NVARCHAR(100)
 
 AS
-	INSERT into Categorie ([Cat])
-	output inserted.Cat
-	Values (@categorie) 
+	INSERT INTO [dbo].[Categorie] ([Cat])
+		OUTPUT [inserted].[Cat]
+		VALUES (@categorie) 

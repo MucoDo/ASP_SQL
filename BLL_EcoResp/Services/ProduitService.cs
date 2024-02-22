@@ -37,10 +37,11 @@ namespace BLL_EcoResp.Services
         {
             _repository.Update(data.ToDAL());
         }
-        void ICRUDRepository<Produit, int>.Delete(int id)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _repository.Delete(id);
         }
+
 
     }
 }

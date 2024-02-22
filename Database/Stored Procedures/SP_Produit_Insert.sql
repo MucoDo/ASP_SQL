@@ -1,10 +1,10 @@
 ﻿CREATE PROCEDURE [dbo].[SP_Produit_Insert]
-	@nomProduit nvarchar(100),
-	@description nvarchar(100),
-	@prix decimal(10,2),
-	@ecoscore char(1),
-	@cat nvarchar(100)
+	@nomProduit NVARCHAR(100),
+	@description NVARCHAR(100),
+	@prix DECIMAL(10,2),
+	@ecoscore CHAR(1),
+	@cat NVARCHAR(100)
 AS
-	Insert into Produit ([NomProduit],[Description],[Prix],[EcoScore],[Cat])
-		output [inserted].Id_Produit
+	INSERT INTO  [dbo].[Produit] ([NomProduit],[Description],[Prix],[EcoScore],[Cat])
+		output [inserted].[Id_Produit]
 		Values (@nomProduit,@description,@prix,@ecoscore,@cat)

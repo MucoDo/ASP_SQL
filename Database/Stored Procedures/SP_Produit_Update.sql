@@ -1,16 +1,16 @@
 ﻿CREATE PROCEDURE [dbo].[SP_Produit_Update]
-	@id_Produit int,
-	@nomProduit nvarchar(100),
-	@description nvarchar(100),
-	@prix decimal(10,2),
-	@ecoscore char(1),
-	@cat nvarchar(100)
+	@id_Produit INT,
+	@nomProduit NVARCHAR(100),
+	@description NVARCHAR(100),
+	@prix DECIMAL(10,2),
+	@ecoscore CHAR(1),
+	@cat NVARCHAR(100)
 AS
-	UPDATE Produit
+	UPDATE [dbo].[Produit]
 		SET 
 			[NomProduit]=@nomProduit,
 			[Description]=@description,
 			[Prix]=@prix,
 			[EcoScore]=@ecoscore,
 			[Cat]=@cat
-		WHERE Id_Produit=@id_Produit
+		WHERE [Id_Produit]=@id_Produit

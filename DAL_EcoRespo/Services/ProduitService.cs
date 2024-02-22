@@ -21,14 +21,14 @@ namespace DAL_EcoResp.Services
             {
                 using (SqlCommand command = connection.CreateCommand())
                 {
-                    command.CommandText = "SP_Produit_GetALL_favoris";
+                    command.CommandText = "SP_Produit_GetALL";
                     command.CommandType = CommandType.StoredProcedure;
                     connection.Open();
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            yield return reader.ToProduit_Fav();
+                            yield return reader.ToProduit();
                         }
                     }
                 }
@@ -79,7 +79,7 @@ namespace DAL_EcoResp.Services
                 {
                     command.CommandText = "SP_Produit_Update";
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("id_Produit", data.Id_Produit);
+                    command.Parameters.AddWithValue("Id_Produit", data.Id_Produit);
                     command.Parameters.AddWithValue("nomProduit", data.NomProduit);
                     command.Parameters.AddWithValue("description", data.Description);
                     command.Parameters.AddWithValue("prix", data.Prix);
@@ -91,12 +91,22 @@ namespace DAL_EcoResp.Services
                 }
             }
         }
-        void ICRUDRepository<Produit, int>.Delete(int id)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
-        }
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_Produit_Delete";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("Id_Produit", id);
+                    connection.Open();
+                    if (command.ExecuteNonQuery() <= 0)
+                        throw new ArgumentException(nameof(id), $"L'identifiant {id} n'est pas das la base de données");
 
-      
+                }
+            }
+        }
 
     }
 }
