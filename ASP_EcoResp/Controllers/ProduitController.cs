@@ -92,22 +92,36 @@ namespace ASP_EcoResp.Controllers
 
         // GET: ProduitController/Delete/5
         public ActionResult Delete(int id)
+        
         {
-            return View();
+            try
+            {
+                ProduitDeleteForm model = _produitRepository.Get(id).ToDelete();
+                if(model is null) throw new InvalidDataException();
+                return View(model);
+            }
+            catch
+            {
+                TempData["ErrorMessage"] = $"L'identifiant {id} est invalide...";
+                return RedirectToAction(nameof(Index));
+            }
+            
         }
 
         // POST: ProduitController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, ProduitDeleteForm form)
         {
             try
             {
+                _produitRepository.Delete(id);
+                TempData["SuccessMessage"] = $"L'enrgistrement {id} a été supprimé";
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View(form);
             }
         }
     }

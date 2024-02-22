@@ -65,6 +65,19 @@ namespace ASP_EcoResp.Handlers
                 entity.Cat);
 
         }
+        public static ProduitDeleteForm ToDelete(this Produit entity)
+        {
+            if (entity is null) return null;
+            return new ProduitDeleteForm()
+            {
+                Id_Produit = entity.Id_Produit,
+                NomProduit = entity.NomProduit,
+                Description = entity.Description,
+                Prix = entity.Prix,
+                EcoScore = entity.EcoScore.ToString(),
+                Cat = entity.Cat
+            };
+        }
         #endregion
     }
 }
