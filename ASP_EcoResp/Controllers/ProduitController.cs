@@ -141,28 +141,33 @@ namespace ASP_EcoResp.Controllers
             }
         }
 
-        public ActionResult Search(string? search, string? ecoScore)
+        //public ActionResult Search(string? search, string? ecoScore)
+        //{
+        //    try
+        //    {
+
+        //        IEnumerable<ProduitListItemViewModel> model = _produitRepository.GetBySearchBar(search, ecoScore).Select(d => d.ToListItem());
+        //        return View(model);
+        //        //return RedirectToAction(nameof(Index));
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        return View();
+        //    }
+        //}
+
+        public ActionResult Search(SearchHomeForm form)
         {
             try
             {
-
-                IEnumerable<ProduitListItemViewModel> model = _produitRepository.GetBySearchBar(search, ecoScore).Select(d => d.ToListItem());
-                return View(model);
-                //return RedirectToAction(nameof(Index));
-            }
-            catch (Exception)
-            {
-
-                return View();
-            }
-        }
-
-        public ActionResult FiltreEcoScore(string? search, string? ecoscore)
-        {
-            try
-            {
-
-                IEnumerable<ProduitListItemViewModel> model = _produitRepository.GetBySearchBar(search,ecoscore).Select(d => d.ToListItem());
+                IEnumerable<ProduitListItemViewModel> model;
+                if (form.Search is null && form.EcoScore is null)
+                {
+                    model = _produitRepository.Get().Select(d => d.ToListItem());
+                    return View(model);
+                }
+                model = _produitRepository.GetBySearchBar(form.Search,form.EcoScore.ToString()).Select(d => d.ToListItem());
                 return View(model);
                 //return RedirectToAction(nameof(Index));
             }

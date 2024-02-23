@@ -7,9 +7,10 @@ namespace ASP_EcoResp.Models
     public class SearchHomeForm
     {
         [DisplayName("Nom ou catégorie")]
-        public string? Search {  get; set; }
+        public string? Search { get; set; }
 
-        public EcoScore? EcoScore { get; set; }
-     
+        public EcoScore? EcoScore { get; set; } 
+
+
     }
 }
