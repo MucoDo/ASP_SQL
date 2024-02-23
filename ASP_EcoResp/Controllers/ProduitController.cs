@@ -157,5 +157,21 @@ namespace ASP_EcoResp.Controllers
             }
         }
 
+        public ActionResult FiltreEcoScore(string? search)
+        {
+            try
+            {
+
+                IEnumerable<ProduitListItemViewModel> model = _produitRepository.GetBySearchBar(search).Select(d => d.ToListItem());
+                return View(model);
+                //return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+
+                return View();
+            }
         }
+
+    }
 }
