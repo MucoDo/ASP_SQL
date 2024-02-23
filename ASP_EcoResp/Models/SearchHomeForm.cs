@@ -6,7 +6,7 @@ namespace ASP_EcoResp.Models
 {
     public class SearchHomeForm
     {
-        [DisplayName("Recherche par nom ou par catégorie")]
+        [DisplayName("Produits souhaités")]
         public string Search {  get; set; }
  
     }

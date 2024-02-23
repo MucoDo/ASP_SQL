@@ -45,9 +45,9 @@ namespace ASP_EcoResp.Controllers
             {
                 if (form is null) ModelState.AddModelError(nameof(form), "Le formulaire ne correspond pas");
                 if (!ModelState.IsValid) throw new Exception();
-                int id = _mediaRepository.Insert(form.ToBLL());
+                _mediaRepository.Insert(form.ToBLL());
                 await form.lienMedia.SaveFile();
-                return RedirectToAction(nameof(Details), new { id });
+                return RedirectToAction("Details","Produit", new { id = form.Id_Produit });
             }
             catch
             {
