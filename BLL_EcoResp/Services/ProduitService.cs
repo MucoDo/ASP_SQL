@@ -46,5 +46,14 @@ namespace BLL_EcoResp.Services
         {
             return _repository.GetBySearchBar(search,ecoscore).Select(d => d.ToBLL());
         }
+
+        public IEnumerable<Produit> GetBySearchBarOnlySearch(string search)
+        {
+            return _repository.GetBySearchBarOnlySearch(search).Select(d => d.ToBLL());
+        }
+        public IEnumerable<Produit> GetBySearchBarOnlyEcoscore(string ecoscore)
+        {
+            return _repository.GetBySearchBarOnlyEcoscore(ecoscore).Select(d => d.ToBLL());
+        }
     }
 }

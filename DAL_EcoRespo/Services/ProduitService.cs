@@ -126,5 +126,40 @@ namespace DAL_EcoResp.Services
             }
         }
 
+        public IEnumerable<Produit> GetBySearchBarOnlySearch(string search)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_Produit_SearchBarOnlySearch";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("search", search);
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read()) yield return reader.ToProduit();
+                    }
+                }
+            }
+        }
+
+        public IEnumerable<Produit> GetBySearchBarOnlyEcoscore(string ecoscore)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_Produit_SearchBarOnlyEcoscore";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("ecoscore", ecoscore);
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read()) yield return reader.ToProduit();
+                    }
+                }
+            }
+        }
     }
 }

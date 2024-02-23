@@ -167,6 +167,16 @@ namespace ASP_EcoResp.Controllers
                     model = _produitRepository.Get().Select(d => d.ToListItem());
                     return View(model);
                 }
+                if (form.Search is not null && form.EcoScore is null)
+                {
+                    model=_produitRepository.GetBySearchBarOnlySearch(form.Search).Select(d => d.ToListItem());
+                    return View(model);
+                }
+                if (form.Search is null && form.EcoScore is not null)
+                {
+                    model= _produitRepository.GetBySearchBarOnlyEcoscore(form.EcoScore.ToString()).Select(d => d.ToListItem());
+                    return View(model);
+                } 
                 model = _produitRepository.GetBySearchBar(form.Search,form.EcoScore.ToString()).Select(d => d.ToListItem());
                 return View(model);
                 //return RedirectToAction(nameof(Index));
