@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using BLL_EcoResp.Mapper;
-using static System.Collections.Specialized.BitVector32;
+
 
 namespace BLL_EcoResp.Services
 {
