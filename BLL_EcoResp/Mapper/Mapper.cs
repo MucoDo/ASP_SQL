@@ -35,9 +35,10 @@ namespace BLL_EcoResp.Mapper
                 EcoScore = entity.EcoScore.ToString(),
                 Cat = entity.Cat
             };
-        } 
+        }
         #endregion
 
+        #region Media
         public static DAL.Media ToDAL(this BLL.Media entity)
         {
 
@@ -49,6 +50,19 @@ namespace BLL_EcoResp.Mapper
                 Id_Produit = entity.Id_Produit,
 
             };
+        } 
+
+        public static BLL.Media ToBLL(this DAL.Media entity)
+        {
+
+            if (entity is null) return null;
+            return new BLL.Media(
+                entity.Id_Media,
+                entity.lienMedia,
+                entity.Id_Produit
+                );
         }
+
+        #endregion
     }
 }

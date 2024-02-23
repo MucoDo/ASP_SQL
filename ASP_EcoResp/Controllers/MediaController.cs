@@ -20,7 +20,8 @@ namespace ASP_EcoResp.Controllers
         // GET: MediaController
         public ActionResult Index()
         {
-            return View();
+            IEnumerable<MediaListViewModel> model = _mediaRepository.Get().Select(d => d.ToListItem());
+            return View(model);
         }
 
         // GET: MediaController/Details/5
@@ -38,15 +39,15 @@ namespace ASP_EcoResp.Controllers
         // POST: MediaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(MediaCreateForm form)
+        public async Task<ActionResult> Create(MediaCreateForm form)
         {
             try
             {
-                if (form is null) ModelState.AddModelError(nameof(form), "Aucun formulaire retourné...");
+                if (form is null) ModelState.AddModelError(nameof(form), "Le formulaire ne correspond pas");
                 if (!ModelState.IsValid) throw new Exception();
-                int media_id = _mediaRepository.Insert(form.ToBLL());
-                TempData["SuccessMessage"] = "Enregistrement effectué avec succès!";
-                return RedirectToAction(nameof(Details), new { id = media_id });
+                int id = _mediaRepository.Insert(form.ToBLL());
+                await form.lienMedia.SaveFile();
+                return RedirectToAction(nameof(Details), new { id });
             }
             catch
             {

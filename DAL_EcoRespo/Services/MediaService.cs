@@ -6,12 +6,13 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
 using System.Text;
+using DAL_EcoResp.Mapper;
 
 namespace DAL_EcoResp.Services
 {
     public class MediaService : BaseService, IMediaRepository<Media>
     {
-        public MediaService(IConfiguration configuration) : base(configuration, "MediaEcoresp")
+        public MediaService(IConfiguration configuration) : base(configuration, "ProduitEcoresp")
         {
         }
 
@@ -30,12 +31,27 @@ namespace DAL_EcoResp.Services
                 }
             }
         }
-        void ICRUDRepository<Media, int>.Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
 
-        IEnumerable<Media> ICRUDRepository<Media, int>.Get()
+        public IEnumerable<Media> Get()
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_Media_GetAll";
+                    command.CommandType = CommandType.StoredProcedure;
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            yield return reader.ToMedia();
+                        }
+                    }
+                }
+            }
+        }
+        void ICRUDRepository<Media, int>.Delete(int id)
         {
             throw new NotImplementedException();
         }

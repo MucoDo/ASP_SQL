@@ -9,7 +9,7 @@ namespace BLL_EcoResp.Entities
         public Media(int id_Media, string lienMedia, int id_Produit)
         {
             Id_Media = id_Media;
-            lienMedia = lienMedia;
+            this.lienMedia = lienMedia;
             Id_Produit = id_Produit;
         }
 

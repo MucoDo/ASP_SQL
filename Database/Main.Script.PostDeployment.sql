@@ -16,9 +16,7 @@ EXEC SP_Categorie_Insert 'Nettoyage';
 EXEC SP_Produit_Insert 'Gourde', 'Gourde en verre','15.90','A','Vaiselle & Ustensiles de cuisine';
 EXEC SP_Produit_Insert 'Lange', 'Lange en tissus','50','A','Puériculture';
 EXEC SP_Produit_Insert 'Déboucheur', 'Déboucheur','50','C','Nettoyage';
-EXEC SP_Media_Insert 'gourde1.png',1;
-EXEC SP_Media_Insert 'lange1.png',2;
-EXEC SP_Media_Insert 'deboucheur1.png',3;
+
 
 declare @TDate datetime= getdate();
 

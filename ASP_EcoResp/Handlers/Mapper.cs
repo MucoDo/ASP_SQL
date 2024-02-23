@@ -88,10 +88,22 @@ namespace ASP_EcoResp.Handlers
             return new Media
             (
                 0,
-                entity.lienMedia,
+                entity.lienMedia.FileName,
                 entity.Id_Produit
           
             );
+        }
+
+
+        public static MediaListViewModel ToListItem(this Media entity)
+        {
+            if (entity is null) return null;
+            return new MediaListViewModel()
+            {
+                Id_Media = entity.Id_Media,
+                lienMedia = entity.lienMedia,
+                Id_Produit = entity.Id_Produit
+            };
         }
         #endregion
     }

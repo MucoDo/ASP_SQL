@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using BLL_EcoResp.Mapper;
+using System.Linq;
 
 namespace BLL_EcoResp.Services
 {
@@ -16,6 +17,10 @@ namespace BLL_EcoResp.Services
             _repository = repository;
         }
 
+        public IEnumerable<Media> Get()
+        {
+            return _repository.Get().Select(d => d.ToBLL());
+        }
         public int Insert(Media data)
         {
             return _repository.Insert(data.ToDAL());
@@ -27,10 +32,7 @@ namespace BLL_EcoResp.Services
             throw new NotImplementedException();
         }
 
-        IEnumerable<Media> ICRUDRepository<Media, int>.Get()
-        {
-            throw new NotImplementedException();
-        }
+
 
         Media ICRUDRepository<Media, int>.Get(int id)
         {

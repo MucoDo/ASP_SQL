@@ -1,4 +1,6 @@
 ﻿@model ASP_EcoResp.Models.ProduitDetailsViewModel
+@inject Shared.IMediaRepository<BLL_EcoResp.Entities.Media> mediaRepository
+
 
 @{
     ViewData["Title"] = "Details";
@@ -51,6 +53,21 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Cat)
         </dd>
+        <dt class="col-sm-2">
+            Médias :
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var media in mediaRepository.Get())
+            {
+                if (Model.Id_Produit == media.Id_Produit)
+                {
+                    <img src="~/assets/img/@media.lienMedia" width="80" height="80" />
+                }
+            }
+            <a asp-action="Create" asp-controller="Media">Ajouter des images</a>
+
+        </dd> 
+
     </dl>
 </div>
 <div>
