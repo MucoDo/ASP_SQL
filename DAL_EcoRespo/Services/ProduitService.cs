@@ -107,7 +107,7 @@ namespace DAL_EcoResp.Services
                 }
             }
         }
-        public IEnumerable<Produit> GetBySearchBar(string search)
+        public IEnumerable<Produit> GetBySearchBar(string search, string ecoscore)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -116,6 +116,7 @@ namespace DAL_EcoResp.Services
                     command.CommandText = "SP_Produit_SearchBar";
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("search", search);
+                    command.Parameters.AddWithValue("ecoscore", ecoscore);
                     connection.Open();
                     using (SqlDataReader reader = command.ExecuteReader())
                     {

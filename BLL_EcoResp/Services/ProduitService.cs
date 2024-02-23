@@ -42,9 +42,9 @@ namespace BLL_EcoResp.Services
             _repository.Delete(id);
         }
 
-        public IEnumerable<Produit> GetBySearchBar(string search)
+        public IEnumerable<Produit> GetBySearchBar(string search, string ecoscore)
         {
-            return _repository.GetBySearchBar(search).Select(d => d.ToBLL());
+            return _repository.GetBySearchBar(search,ecoscore).Select(d => d.ToBLL());
         }
     }
 }
